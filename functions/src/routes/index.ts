@@ -1,4 +1,4 @@
-import { NODE_ENV } from '@config/env'
+import { env } from '@config/env'
 import { BASE_URL_SERVER } from '@core/constants/baseURL'
 import { formatDateTime } from '@core/helpers/date'
 import HttpResponse from '@core/modules/response/HttpResponse'
@@ -14,7 +14,7 @@ route.get('/', function index(req: Request, res: Response) {
     source: 'https://github.com/masb0ymas/webhook-functions',
   }
 
-  if (NODE_ENV !== 'production') {
+  if (env.NODE_ENV !== 'production') {
     responseData = {
       ...responseData,
       docs: `${BASE_URL_SERVER}/v1/api-docs`,

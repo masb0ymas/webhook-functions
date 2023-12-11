@@ -3,7 +3,7 @@ import expressErrorYup from '@apps/middlewares/expressErrorYups'
 import { expressRateLimit } from '@apps/middlewares/expressRateLimit'
 import { expressWithState } from '@apps/middlewares/expressWithState'
 import { expressUserAgent } from '@apps/middlewares/userAgent'
-import { APP_NAME, APP_PORT, NODE_ENV } from '@config/env'
+import { env } from '@config/env'
 import { i18nConfig } from '@config/i18n'
 import { winstonLogger, winstonStream } from '@config/logger'
 import allowedOrigins from '@core/constants/allowedOrigins'
@@ -34,7 +34,7 @@ class App {
 
   constructor() {
     this.application = Express()
-    this.port = APP_PORT
+    this.port = env.APP_PORT
 
     // enabled
     this.plugins()
@@ -151,10 +151,10 @@ class App {
       const bind = typeof addr === 'string' ? `${addr}` : `${addr?.port}`
 
       const host = chalk.cyan(`http://localhost:${bind}`)
-      const env = chalk.blue(NODE_ENV)
+      const environment = chalk.blue(env.NODE_ENV)
 
-      const msgType = `${APP_NAME}`
-      const message = `Server listening on ${host} ⚡️ & Env: ${env} 🚀`
+      const msgType = `${env.APP_NAME}`
+      const message = `Server listening on ${host} ⚡️ & Env: ${environment} 🚀`
 
       const logMessage = printLog(msgType, message)
       console.log(logMessage)

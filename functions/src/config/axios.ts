@@ -3,9 +3,9 @@ import axios, { type AxiosError, type AxiosInstance } from 'axios'
 import chalk from 'chalk'
 import { ms, printLog } from 'expresso-core'
 import _ from 'lodash'
-import { AXIOS_TIMEOUT } from './env'
+import { env } from './env'
 
-const timeout = ms(AXIOS_TIMEOUT)
+const timeout = ms(env.AXIOS_TIMEOUT)
 
 /**
  * Create Axios Instance

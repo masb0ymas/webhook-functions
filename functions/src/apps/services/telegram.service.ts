@@ -1,14 +1,10 @@
 import FetchAxios from '@config/axios'
-import {
-  TELEGRAM_API_URL,
-  TELEGRAM_BOT_TOKEN,
-  TELEGRAM_CHAT_ID,
-} from '@config/env'
+import { env } from '@config/env'
 import { type AxiosResponse } from 'axios'
 import qs from 'qs'
 
-const Fetcher = new FetchAxios(TELEGRAM_API_URL)
-const BOT_TOKEN = String(TELEGRAM_BOT_TOKEN)
+const Fetcher = new FetchAxios(env.TELEGRAM_API_URL)
+const BOT_TOKEN = String(env.TELEGRAM_BOT_TOKEN)
 
 export default class TelegramService {
   public static api = Fetcher.default
@@ -22,19 +18,22 @@ export default class TelegramService {
     return response
   }
 
+  /**
+   *
+   * @param chat_id
+   * @param message
+   * @returns
+   */
   public static async sendMessage(
+    chat_id: string,
     message: string
   ): Promise<AxiosResponse<any>> {
-    const chatId = String(TELEGRAM_CHAT_ID)
-
-    const queryParams = qs.stringify({
-      chat_id: chatId,
-      text: message,
-    })
+    const queryParams = qs.stringify({ chat_id, text: message })
 
     const response = await this.api.get(
       `/bot${BOT_TOKEN}/sendMessage?${queryParams}`
     )
+
     return response
   }
 }
