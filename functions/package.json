@@ -23,6 +23,7 @@
     "node": "18"
   },
   "dependencies": {
+    "@google-cloud/functions-framework": "^3.3.0",
     "axios": "^1.3.4",
     "chalk": "~4.1.2",
     "compression": "^1.7.4",
